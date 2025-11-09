@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profile | AgriSmart AI</title>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="script.js"></script>
+  <script defer src="auth.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <div class="logo">🌱 AgriSmart AI</div>
+    <nav id="nav-menu">
+      <a href="index.html">Home</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div id="hamburger">☰</div>
+    <div id="google_translate_element"></div>
+  </header>
+
+  <section class="profile-section">
+    <h1>Your Profile</h1>
+    <div class="profile-card">
+      <p><strong>Name:</strong> <span id="userName">--</span></p>
+      <p><strong>Email:</strong> <span id="userEmail">--</span></p>
+      <button id="logoutBtn" class="btn">Logout</button>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 AgriSmart AI | 23BQ1A05I5 </p>
+  </footer>
+
+  <!-- 🌍 Google Translate -->
+  <script>
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'en,te,hi,ta,ml,bn,kn,gu,mr,pa'
+      }, 'google_translate_element');
+    }
+  </script>
+  <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+</html>

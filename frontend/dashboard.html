@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard | AgriSmart AI</title>
+  <link rel="stylesheet" href="dashboard.css" />
+  <script defer src="dashboard.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+<header>
+  <div class="logo">🌾 AgriSmart Dashboard</div>
+  <nav id="nav-menu">
+  <a href="index.html">Home</a>
+  <a href="dashboard.html" class="active">Dashboard</a>
+  <a href="history.html">History</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Contact</a>
+</nav>
+
+  <div id="hamburger">☰</div>
+  <div id="google_translate_element"></div>
+</header>
+
+<main>
+  <section class="predict" id="predict">
+    <h1>AI Crop Yield Prediction</h1>
+    <p>Enter environmental, soil, and seasonal data to estimate your crop yield.</p>
+
+    <button onclick="window.location.href='history.html'" class="btn" style="margin-top: 1rem;">📜 View Prediction History</button>
+
+
+    <form id="yieldForm">
+      <!-- Crop Type -->
+      <label for="crop">Crop Type</label>
+      <select id="crop" required>
+        <option value="">Select Crop Type</option>
+        <optgroup label="Food Grains">
+          <option value="1.3">Rice</option>
+          <option value="1.2">Wheat</option>
+          <option value="1.1">Maize</option>
+          <option value="1.0">Millets</option>
+          <option value="1.1">Pulses</option>
+        </optgroup>
+        <optgroup label="Cash Crops">
+          <option value="1.4">Cotton</option>
+          <option value="1.5">Sugarcane</option>
+          <option value="1.2">Jute</option>
+          <option value="1.3">Tea</option>
+          <option value="1.3">Coffee</option>
+          <option value="1.2">Oilseeds</option>
+        </optgroup>
+        <optgroup label="Horticulture Crops">
+          <option value="1.3">Fruits</option>
+          <option value="1.4">Vegetables</option>
+        </optgroup>
+      </select>
+
+      <!-- Soil Type -->
+      <label for="soil">Soil Type</label>
+      <select id="soil" required>
+        <option value="">Select Soil Type</option>
+        <option value="1.1">Red Soil</option>
+        <option value="1.3">Black Soil</option>
+        <option value="1.4">Alluvial Soil</option>
+        <option value="1.0">Laterite Soil</option>
+        <option value="0.9">Mountain Soil</option>
+        <option value="0.8">Marshy Soil</option>
+        <option value="1.25">Loamy Soil</option>
+        <option value="0.85">Sandy Soil</option>
+        <option value="0.7">Arid Soil</option>
+      </select>
+
+      <!-- Season -->
+      <label for="season">Season</label>
+      <select id="season" required>
+        <option value="">Select Season</option>
+        <option value="1.1">Winter (Dec–Mar)</option>
+        <option value="1.2">Summer (Apr–Jun)</option>
+        <option value="1.4">Monsoon (Jun–Sep)</option>
+        <option value="1.0">Post-Monsoon (Oct–Dec)</option>
+      </select>
+
+      <!-- Environmental Factors -->
+      <label for="temp">Temperature (°C)</label>
+      <input type="number" id="temp" placeholder="e.g., 30" required>
+
+      <label for="humidity">Humidity (%)</label>
+      <input type="number" id="humidity" placeholder="e.g., 70" required>
+
+      <label for="rain">Rainfall (mm)</label>
+      <input type="number" id="rain" placeholder="e.g., 120" required>
+
+      <button type="submit" class="btn">Predict Yield</button>
+    </form>
+
+    <div id="result" class="result-card hidden">
+      <h2>Predicted Yield</h2>
+      <p id="yieldValue">--</p>
+    </div>
+
+    <div id="recommend" class="recommend-card hidden">
+      <h2>🌱 Recommended Crops</h2>
+      <p id="recommendValue">--</p>
+    </div>
+  </section>
+
+  <!-- 🌾 Prediction History Section -->
+  
+
+
+  <!-- 🌦 Weather Info -->
+  <section class="weather-info">
+    <h2>🌦 Understanding Weather Patterns</h2>
+    <p>
+      Weather patterns are repeating sequences of temperature, humidity, and rainfall that help farmers plan irrigation,
+      sowing, and harvesting efficiently for better productivity.
+    </p>
+  </section>
+</main>
+
+<footer>
+  <p>© 2025 AgriSmart AI | 23BQ1A05I5</p>
+</footer>
+
+<!-- 🗣 Google Translate Integration -->
+<script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+      pageLanguage: 'en',
+      includedLanguages: 'en,te,hi,ta,ml,bn,kn,gu,mr,pa',
+      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+    }, 'google_translate_element');
+  }
+</script>
+<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<script async src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&callback=initMap"></script>
+</body>
+</html>

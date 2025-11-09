@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI-Powered Crop Yield Prediction</title>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="script.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <div class="logo">🌱 AgriSmart AI</div>
+    <nav id="nav-menu">
+  <a href="index.html">Home</a>
+  <a href="dashboard.html">Dashboard</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Contact</a>
+  <a href="login.html">Login</a>
+  <a href="register.html">Register</a>
+</nav>
+
+    <div id="hamburger">☰</div>
+  </header>
+
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <h1>AI-Powered Crop Yield Prediction</h1>
+      <p>Empowering farmers with data-driven insights for better harvests and sustainable agriculture.</p>
+      <a href="dashboard.html" class="btn">Go to Dashboard</a>
+    </div>
+  </section>
+
+  <section id="features" class="features">
+    <h2>Why Choose Our System?</h2>
+    <div class="feature-grid">
+      <div class="card">
+        <h3>🌦 Weather Insights</h3>
+        <p>Get accurate weather data to plan the best planting and harvest time.</p>
+      </div>
+      <div class="card">
+        <h3>🧪 Soil Analysis</h3>
+        <p>Analyze soil moisture and nutrient levels for optimized yield.</p>
+      </div>
+      <div class="card">
+        <h3>🤖 AI Prediction</h3>
+        <p>Predict crop yield based on real-time data and machine learning models.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 AgriSmart AI | Developed by 23BQ1A05I5 </p>
+  </footer>
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    const navMenu = document.getElementById("nav-menu");
+
+    // Find the specific links
+    const loginLink = document.querySelector('a[href="login.html"]');
+    const registerLink = document.querySelector('a[href="register.html"]');
+    const dashboardLink = document.querySelector('a[href="dashboard.html"]');
+
+    if (user) {
+      // Hide login/register when logged in
+      if (loginLink) loginLink.style.display = "none";
+      if (registerLink) registerLink.style.display = "none";
+
+      // Create user display and logout button
+      const userInfo = document.createElement("span");
+      userInfo.textContent = `👤 ${user.name}`;
+      userInfo.style.marginLeft = "15px";
+      userInfo.style.fontWeight = "600";
+      userInfo.style.color = "#fff";
+
+      const logoutBtn = document.createElement("a");
+      logoutBtn.href = "#";
+      logoutBtn.textContent = "Logout";
+      logoutBtn.style.marginLeft = "15px";
+      logoutBtn.classList.add("btn");
+
+      logoutBtn.addEventListener("click", () => {
+        localStorage.removeItem("user");
+        alert("👋 Logged out successfully!");
+        window.location.href = "login.html";
+      });
+
+      // Add to navbar
+      navMenu.appendChild(userInfo);
+      navMenu.appendChild(logoutBtn);
+    } else {
+      // Hide dashboard link when not logged in
+      if (dashboardLink) dashboardLink.style.display = "none";
+    }
+  });
+</script>
+
+</body>
+</html>
