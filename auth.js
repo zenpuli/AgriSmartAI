@@ -1,4 +1,5 @@
-// 🌱 AgriSmart AI Authentication System
+// 🌱 AgriSmart AI Authentication System (Render Deployment)
+const BASE_URL = "https://agrismartai-1.onrender.com"; // Render backend URL
 
 // ========== REGISTER ==========
 document.getElementById('registerForm')?.addEventListener('submit', async (e) => {
@@ -14,7 +15,7 @@ document.getElementById('registerForm')?.addEventListener('submit', async (e) =>
   }
 
   try {
-    const res = await fetch("http://localhost:5000/api/register", {
+    const res = await fetch(`${BASE_URL}/api/register`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name, email, password }),
@@ -33,7 +34,6 @@ document.getElementById('registerForm')?.addEventListener('submit', async (e) =>
   }
 });
 
-
 // ========== LOGIN ==========
 document.getElementById('loginForm')?.addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -47,7 +47,7 @@ document.getElementById('loginForm')?.addEventListener('submit', async (e) => {
   }
 
   try {
-    const res = await fetch("http://localhost:5000/api/login", {
+    const res = await fetch(`${BASE_URL}/api/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
@@ -67,33 +67,3 @@ document.getElementById('loginForm')?.addEventListener('submit', async (e) => {
     console.error(err);
   }
 });
-
-
-// ========== PROFILE ==========
-if (window.location.pathname.endsWith("profile.html")) {
-  const user = JSON.parse(localStorage.getItem("user"));
-
-  if (user) {
-    document.getElementById("userName").textContent = user.name;
-    document.getElementById("userEmail").textContent = user.email;
-  } else {
-    // Redirect to login if no user found
-    window.location.href = "login.html";
-  }
-
-  document.getElementById("logoutBtn")?.addEventListener("click", () => {
-    localStorage.removeItem("user");
-    alert("👋 Logged out successfully!");
-    window.location.href = "login.html";
-  });
-}
-
-
-// ========== DASHBOARD PROTECTION ==========
-if (window.location.pathname.endsWith("dashboard.html")) {
-  const user = JSON.parse(localStorage.getItem("user"));
-  if (!user) {
-    alert("🔒 Please log in to access the Dashboard.");
-    window.location.href = "login.html";
-  }
-}

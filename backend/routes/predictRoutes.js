@@ -8,6 +8,8 @@ router.post("/predict", async (req, res) => {
   try {
     const { cropFactor, soilFactor, seasonFactor, temp, humidity, rain, predictedYield, confidence, email } = req.body;
 
+    if (!email) return res.status(400).json({ message: "⚠️ Email is required" });
+
     const prediction = new Prediction({
       cropFactor,
       soilFactor,
@@ -54,6 +56,5 @@ router.delete("/predictions", async (req, res) => {
     res.status(500).json({ message: "❌ Failed to delete predictions" });
   }
 });
-
 
 export default router;

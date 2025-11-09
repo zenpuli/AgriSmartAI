@@ -1,4 +1,4 @@
-// 🌱 AgriSmart AI Backend Server (Modular + Reliable)
+// 🌱 AgriSmart AI Backend Server (Production Ready)
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
@@ -16,10 +16,15 @@ const app = express();
 // 🧩 Middleware
 app.use(express.json());
 
-// ✅ Configure CORS to allow frontend ports
+// ✅ Configure CORS (allow frontend URL in production)
 app.use(cors({
-  origin: ["http://127.0.0.1:5500", "http://localhost:5500"],
-  methods: ["GET", "POST"],
+  origin: [
+    "https://zenpuli.github.io",       // GitHub Pages frontend
+    "http://127.0.0.1:5500",           // local testing
+    "http://localhost:5500",           // local testing
+    process.env.FRONTEND_URL           // optional if you use env
+  ],
+  methods: ["GET", "POST", "DELETE"],
   credentials: true
 }));
 
@@ -39,5 +44,5 @@ app.get("/", (req, res) => {
 // 🚀 Start Server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () =>
-  console.log(`🚀 Server running at http://localhost:${PORT}`)
+  console.log(`🚀 Server running on port ${PORT}`)
 );

@@ -9,6 +9,7 @@ const predictionSchema = new mongoose.Schema({
   rain: Number,
   predictedYield: String,
   confidence: Number,
+  email: { type: String, required: true }, // Added email field for user-specific queries
   createdAt: { type: Date, default: Date.now },
 });
 
