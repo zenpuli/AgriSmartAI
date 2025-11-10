@@ -19,14 +19,16 @@ app.use(express.json());
 // ✅ Configure CORS (allow frontend URL in production)
 app.use(cors({
   origin: [
-    "https://zenpuli.github.io",       // GitHub Pages frontend
-    "http://127.0.0.1:5500",           // local testing
-    "http://localhost:5500",           // local testing
-    process.env.FRONTEND_URL           // optional if you use env
+    "https://zenpuli.github.io",
+    "https://zenpuli.github.io/AgriSmartAI", // add this
+    "http://127.0.0.1:5500",
+    "http://localhost:5500",
+    process.env.FRONTEND_URL
   ],
   methods: ["GET", "POST", "DELETE"],
   credentials: true
 }));
+
 
 // ✅ Connect to MongoDB
 connectDB();
