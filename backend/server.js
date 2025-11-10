@@ -1,5 +1,4 @@
-// 🌱 AgriSmart AI Backend Server (Production Ready)
-
+// 🌱 AgriSmart AI Backend Server
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
@@ -17,24 +16,16 @@ const app = express();
 // 🧩 Middleware
 app.use(express.json());
 
-// ✅ Configure CORS
-const allowedOrigins = ["https://zenpuli.github.io"];
+// ✅ Proper CORS Configuration
+const allowedOrigins = ["https://zenpuli.github.io"]; // Frontend URL
 app.use(
   cors({
     origin: allowedOrigins,
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    credentials: true, // allow cookies or auth headers
-    allowedHeaders: ["Content-Type", "Authorization"], // allow JSON requests
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // allow preflight
+    allowedHeaders: ["Content-Type", "Authorization"], // required headers
+    credentials: true, // only needed if sending cookies or auth headers
   })
 );
-
-// Handle preflight requests globally
-app.options("*", cors({
-  origin: allowedOrigins,
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  credentials: true,
-  allowedHeaders: ["Content-Type", "Authorization"],
-}));
 
 // ✅ Connect to MongoDB
 connectDB();
@@ -44,7 +35,7 @@ app.use("/api", userRoutes);
 app.use("/api", predictRoutes);
 app.use("/api", contactRoutes);
 
-// 🏠 Default Route (for testing)
+// 🏠 Default Route (Test Server)
 app.get("/", (req, res) => {
   res.send("🌿 AgriSmart AI Backend is running successfully!");
 });
