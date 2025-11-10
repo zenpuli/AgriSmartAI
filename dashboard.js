@@ -10,6 +10,9 @@ const yieldValue = document.getElementById("yieldValue");
 const recommend = document.getElementById("recommend");
 const recommendValue = document.getElementById("recommendValue");
 
+// Backend API URL
+const API_BASE = "https://agrismartai-1.onrender.com/api";
+
 // 🧠 AI-style yield prediction (local simulation)
 function predictYield(cropFactor, soilFactor, seasonFactor, temp, humidity, rain) {
   const base = (rain * soilFactor * cropFactor * seasonFactor + humidity * 0.8) / (temp * 0.25);
@@ -33,7 +36,7 @@ function getRecommendations(season, soil) {
 }
 
 // ====== Handle Prediction Form ======
-form?.addEventListener("submit", (e) => {
+form?.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const cropFactor = parseFloat(document.getElementById("crop").value);
@@ -48,7 +51,7 @@ form?.addEventListener("submit", (e) => {
   result.classList.remove("hidden");
   recommend.classList.remove("hidden");
 
-  setTimeout(() => {
+  setTimeout(async () => {
     const yieldResult = predictYield(cropFactor, soilFactor, seasonFactor, temp, humidity, rain);
     const confidence = (90 + Math.random() * 10).toFixed(1);
     const tip = temp > 35
@@ -61,5 +64,21 @@ form?.addEventListener("submit", (e) => {
       <em>${tip}</em>`;
 
     recommendValue.textContent = getRecommendations(seasonFactor, soilFactor);
-  }, 1200); // slightly faster AI simulation
+
+    // Optional: Save prediction to backend
+    try {
+      const response = await fetch(`${API_BASE}/predict`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          cropFactor, soilFactor, seasonFactor, temp, humidity, rain, yieldResult
+        })
+      });
+      const data = await response.json();
+      console.log("Prediction saved:", data);
+    } catch (err) {
+      console.error("Error saving prediction:", err);
+    }
+
+  }, 1200);
 });
