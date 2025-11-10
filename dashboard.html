@@ -12,24 +12,18 @@
 <header>
   <div class="logo">🌾 AgriSmart Dashboard</div>
   <nav id="nav-menu">
-  <a href="index.html">Home</a>
-  <a href="dashboard.html" class="active">Dashboard</a>
-  <a href="history.html">History</a>
-  <a href="about.html">About</a>
-  <a href="contact.html">Contact</a>
-</nav>
-
+    <a href="index.html">Home</a>
+    <a href="dashboard.html" class="active">Dashboard</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </nav>
   <div id="hamburger">☰</div>
-  <div id="google_translate_element"></div>
 </header>
 
 <main>
   <section class="predict" id="predict">
     <h1>AI Crop Yield Prediction</h1>
     <p>Enter environmental, soil, and seasonal data to estimate your crop yield.</p>
-
-    <button onclick="window.location.href='history.html'" class="btn" style="margin-top: 1rem;">📜 View Prediction History</button>
-
 
     <form id="yieldForm">
       <!-- Crop Type -->
@@ -95,20 +89,18 @@
       <button type="submit" class="btn">Predict Yield</button>
     </form>
 
+    <!-- Prediction Result -->
     <div id="result" class="result-card hidden">
       <h2>Predicted Yield</h2>
       <p id="yieldValue">--</p>
     </div>
 
+    <!-- Recommendations -->
     <div id="recommend" class="recommend-card hidden">
       <h2>🌱 Recommended Crops</h2>
       <p id="recommendValue">--</p>
     </div>
   </section>
-
-  <!-- 🌾 Prediction History Section -->
-  
-
 
   <!-- 🌦 Weather Info -->
   <section class="weather-info">
@@ -123,22 +115,5 @@
 <footer>
   <p>© 2025 AgriSmart AI | 23BQ1A05I5</p>
 </footer>
-<!-- Include JS at the end of body -->
-<script defer src="auth.js"></script>
-<script defer src="predict.js"></script>
-
-
-<!-- 🗣 Google Translate Integration -->
-<script type="text/javascript">
-  function googleTranslateElementInit() {
-    new google.translate.TranslateElement({
-      pageLanguage: 'en',
-      includedLanguages: 'en,te,hi,ta,ml,bn,kn,gu,mr,pa',
-      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-    }, 'google_translate_element');
-  }
-</script>
-<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-<script async src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&callback=initMap"></script>
 </body>
 </html>
