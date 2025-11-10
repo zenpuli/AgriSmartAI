@@ -16,14 +16,26 @@ const app = express();
 // 🧩 Middleware
 app.use(express.json());
 
-// ✅ Proper CORS Configuration
-const allowedOrigins = ["https://zenpuli.github.io"]; // Frontend URL
+// ✅ CORS Configuration: allow frontend GitHub Pages and optional local dev
+const allowedOrigins = [
+  "https://zenpuli.github.io",          // root GitHub Pages
+  "https://zenpuli.github.io/AgriSmartAI" // repository subfolder
+];
+
 app.use(
   cors({
-    origin: allowedOrigins,
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // allow preflight
-    allowedHeaders: ["Content-Type", "Authorization"], // required headers
-    credentials: true, // only needed if sending cookies or auth headers
+    origin: function(origin, callback) {
+      // allow requests with no origin (like Postman or server-to-server)
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.indexOf(origin) === -1) {
+        const msg = `CORS policy: Origin ${origin} not allowed`;
+        return callback(new Error(msg), false);
+      }
+      return callback(null, true);
+    },
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
   })
 );
 
@@ -35,7 +47,7 @@ app.use("/api", userRoutes);
 app.use("/api", predictRoutes);
 app.use("/api", contactRoutes);
 
-// 🏠 Default Route (Test Server)
+// 🏠 Default Route (for testing)
 app.get("/", (req, res) => {
   res.send("🌿 AgriSmart AI Backend is running successfully!");
 });
