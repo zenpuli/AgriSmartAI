@@ -16,10 +16,15 @@ const app = express();
 // 🧩 Middleware
 app.use(express.json());
 
-// ✅ Configure CORS (allow frontend URL in production)
-app.use(cors());
-
-
+// ✅ Configure CORS
+const allowedOrigins = ["https://zenpuli.github.io"];
+app.use(
+  cors({
+    origin: allowedOrigins,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    credentials: true, // needed if frontend sends cookies/auth headers
+  })
+);
 
 // ✅ Connect to MongoDB
 connectDB();
