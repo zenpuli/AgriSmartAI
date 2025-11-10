@@ -1,4 +1,5 @@
 // 🌱 AgriSmart AI Backend Server (Production Ready)
+
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
@@ -22,9 +23,18 @@ app.use(
   cors({
     origin: allowedOrigins,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    credentials: true, // needed if frontend sends cookies/auth headers
+    credentials: true, // allow cookies or auth headers
+    allowedHeaders: ["Content-Type", "Authorization"], // allow JSON requests
   })
 );
+
+// Handle preflight requests globally
+app.options("*", cors({
+  origin: allowedOrigins,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  credentials: true,
+  allowedHeaders: ["Content-Type", "Authorization"],
+}));
 
 // ✅ Connect to MongoDB
 connectDB();
