@@ -1,7 +1,7 @@
 // 🌱 AgriSmart AI Authentication System (Render Deployment)
-const BASE_URL = "https://agrismartai-1.onrender.com"; // Render backend URL
+const API_BASE = "https://agrismartai-1.onrender.com/api"; // Backend API base
 
-// ========== REGISTER ==========
+// ===== REGISTER =====
 document.getElementById('registerForm')?.addEventListener('submit', async (e) => {
   e.preventDefault();
 
@@ -10,18 +10,20 @@ document.getElementById('registerForm')?.addEventListener('submit', async (e) =>
   const password = document.getElementById('password').value.trim();
 
   if (!name || !email || !password) {
-    alert("Please fill in all fields!");
+    alert("⚠️ Please fill in all fields!");
     return;
   }
 
   try {
-    const res = await fetch(`${BASE_URL}/api/register`, {
+    const res = await fetch(`${API_BASE}/register`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name, email, password }),
+      credentials: "include" // Needed if backend uses cookies
     });
 
     const data = await res.json();
+
     if (res.ok) {
       alert("✅ Registration Successful! Please log in.");
       window.location.href = "login.html";
@@ -29,12 +31,12 @@ document.getElementById('registerForm')?.addEventListener('submit', async (e) =>
       alert(`⚠️ ${data.message || "Registration failed."}`);
     }
   } catch (err) {
-    alert("❌ Unable to connect to the server.");
     console.error(err);
+    alert("❌ Unable to connect to the server. Check CORS or network.");
   }
 });
 
-// ========== LOGIN ==========
+// ===== LOGIN =====
 document.getElementById('loginForm')?.addEventListener('submit', async (e) => {
   e.preventDefault();
 
@@ -42,15 +44,16 @@ document.getElementById('loginForm')?.addEventListener('submit', async (e) => {
   const password = document.getElementById('loginPassword').value.trim();
 
   if (!email || !password) {
-    alert("Please enter email and password!");
+    alert("⚠️ Please enter email and password!");
     return;
   }
 
   try {
-    const res = await fetch(`${BASE_URL}/api/login`, {
+    const res = await fetch(`${API_BASE}/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
+      credentials: "include" // Required if backend sends cookies
     });
 
     const data = await res.json();
@@ -58,12 +61,12 @@ document.getElementById('loginForm')?.addEventListener('submit', async (e) => {
     if (res.ok) {
       localStorage.setItem("user", JSON.stringify(data.user));
       alert("✅ Login successful!");
-      window.location.href = "profile.html";
+      window.location.href = "dashboard.html";
     } else {
       alert(`⚠️ ${data.message || "Invalid credentials."}`);
     }
   } catch (err) {
-    alert("❌ Unable to connect to the server.");
     console.error(err);
+    alert("❌ Unable to connect to the server. Check CORS or network.");
   }
 });
